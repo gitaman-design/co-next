@@ -9,6 +9,9 @@ import rupee from '../../public/assets/rupee.svg'
 import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
 import { Gallery, Item } from 'react-photoswipe-gallery'
+import { useState, useEffect } from "react";
+import { Spin,Skeleton, Space} from 'antd';
+import {useRouter} from "next/router"
 
 
 
@@ -20,7 +23,43 @@ const handleWidget = () => {
 
 
 
-export default function Slug({id}) {
+export default function Slug({ id }) {
+    
+     const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+        const handleStart = (url) => (url !== router.asPath) && setLoading(true);
+        const handleComplete = (url) => (url === router.asPath) && setLoading(false);
+
+
+    
+        router.events.on('routeChangeStart', handleStart)
+        router.events.on('routeChangeComplete', handleComplete)
+        router.events.on('routeChangeError', handleComplete)
+
+        return () => {
+            router.events.off('routeChangeStart', handleStart)
+            router.events.off('routeChangeComplete', handleComplete)
+            router.events.off('routeChangeError', handleComplete)
+        }
+ 
+  }, [])
+
+  if (loading) {
+    return <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
+
+      <Space>
+        <Skeleton.Image active size={500} />
+          <Skeleton.Image active size={"large"} />
+          <Skeleton.Image active size={"large"} />
+      </Space>
+      
+      <Skeleton active paragraph={{ rows: 8 }} />
+      
+
+  </div>
+}
 
 
   return (

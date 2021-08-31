@@ -1,10 +1,12 @@
 import Head from 'next/head'
 import Link from "next/link"
 import Image from 'next/image'
+import {useRouter} from "next/router"
 import {gql, useQuery} from '@apollo/client';
 import Markdown from 'react-markdown'
 import gfm from 'remark-gfm'
-
+import { useState, useEffect } from "react";
+import { Spin,Skeleton, Space} from 'antd';
 
 const ApiUrl = 'https://cms.bigradar.io'
 
@@ -15,9 +17,43 @@ const handleWidget = () => {
 
 
 
-export default function Slug({id}) {
+export default function Slug({ id }) {
+  
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+        const handleStart = (url) => (url !== router.asPath) && setLoading(true);
+        const handleComplete = (url) => (url === router.asPath) && setLoading(false);
 
 
+    
+        router.events.on('routeChangeStart', handleStart)
+        router.events.on('routeChangeComplete', handleComplete)
+        router.events.on('routeChangeError', handleComplete)
+
+        return () => {
+            router.events.off('routeChangeStart', handleStart)
+            router.events.off('routeChangeComplete', handleComplete)
+            router.events.off('routeChangeError', handleComplete)
+        }
+ 
+  }, [])
+
+  if (loading) {
+    return <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
+
+      <Space>
+        <Skeleton.Image active size={500} />
+          <Skeleton.Image active size={"large"} />
+          <Skeleton.Image active size={"large"} />
+      </Space>
+      
+      <Skeleton active paragraph={{ rows: 8 }} />
+      
+
+  </div>
+}
   return (
     <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
 
@@ -67,7 +103,7 @@ export default function Slug({id}) {
                     <p class="text-white m-0"> Price : Rs {c.price}/-</p>
                   </div>
                   
-                  <Link href={`/${c.slug}`}>
+                  <Link key={c.id} as={`/virtual-offices/${c.id}`} href={'/virtual-offices/[id]'}>
                     <div style={{ backgroundColor: '#232A34' }} class="m-4 hover:bg-black p-4  mt-6">
                       <h1 class="text-white text-center m-0">Know More</h1>
                     </div>

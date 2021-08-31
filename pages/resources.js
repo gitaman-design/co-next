@@ -4,7 +4,10 @@ import Image from 'next/image'
 import mail from '../public/assets/mail.jpg'
 import Query from './api/query/query'
 import BLOG_QUERY from './api/query/blog'
-import { ApolloClient, InMemoryCache, gql} from "@apollo/client";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { useState, useEffect } from "react";
+import { Spin,Skeleton, Space} from 'antd';
+import {useRouter} from "next/router"
 
 
 const ApiUrl = 'https://cms.bigradar.io'
@@ -15,6 +18,42 @@ const handleWidget = () => {
 
 
 export default function Home({ voBlogs }) {
+
+   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+        const handleStart = (url) => (url !== router.asPath) && setLoading(true);
+        const handleComplete = (url) => (url === router.asPath) && setLoading(false);
+
+
+    
+        router.events.on('routeChangeStart', handleStart)
+        router.events.on('routeChangeComplete', handleComplete)
+        router.events.on('routeChangeError', handleComplete)
+
+        return () => {
+            router.events.off('routeChangeStart', handleStart)
+            router.events.off('routeChangeComplete', handleComplete)
+            router.events.off('routeChangeError', handleComplete)
+        }
+ 
+  }, [])
+
+  if (loading) {
+    return <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
+
+      {/* <Space>
+        <Skeleton.Image active size={500} />
+          <Skeleton.Image active size={"large"} />
+          <Skeleton.Image active size={"large"} />
+      </Space> */}
+      
+      <Skeleton active paragraph={{ rows: 16 }} />
+      
+
+  </div>
+}
 
   return (
     <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
