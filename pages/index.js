@@ -1,82 +1,140 @@
 import Head from 'next/head'
+import Link from "next/link"
+import Image from 'next/image'
+import mail from '../public/assets/mail.jpg'
+import Query from './api/query/query'
+import CITY_QUERY from './api/query/category'
+import { ApolloClient, InMemoryCache, gql} from "@apollo/client";
 
-export default function Home() {
+
+const ApiUrl = 'https://cms.bigradar.io'
+
+const handleWidget = () => {
+    window.BigRadar?.open()
+}
+
+
+export default function Home({ voCities }) {
+  // console.log("city", voCities)
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
+      
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        {/* HTML Meta Tags */}
+        <title>virtual office address for company registration all over India with instant documentation | virtual office coworly</title>
+        <meta name="description" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
+
+          {/* Google / Search Engine Tags */}
+          <meta itemprop="name" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
+            <meta itemprop="description" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
+              <meta itemprop="image" content="https://cms.bigradar.io/uploads/ce005b13_38a6_4774_8d34_d7c5c61a5707_c74dcc20a6.jpg" />
+
+                {/* <!-- Facebook Meta Tags --> */}
+                <meta property="og:url" content="https://officevirtual.in" />
+                  <meta property="og:type" content="website" />
+                    <meta property="og:title" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
+                      <meta property="og:description" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
+                        <meta property="og:image" content="https://cms.bigradar.io/uploads/ce005b13_38a6_4774_8d34_d7c5c61a5707_c74dcc20a6.jpg" />
+                          
+                          {/* <!-- Twitter Meta Tags --> */}
+                          <meta name="twitter:card" content="summary_large_image" />
+                            <meta name="twitter:title" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
+                              <meta name="twitter:description" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
+                                <meta name="twitter:image" content="https://cms.bigradar.io/uploads/ce005b13_38a6_4774_8d34_d7c5c61a5707_c74dcc20a6.jpg" />
+
+                                
+                                <link rel="icon" href="/favicon.ico" />
+                                
       </Head>
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
+      <div style={{ backgroundColor: '#232A34'}} class="py-20">
+                <div class="text-center ">
+                    <h1 class="text-4xl text-white font-semibold xl:text-5xl">Virtual Office Address</h1>
+                    <p class="mt-4 text-white text-base xl:text-xl">Get your new fancy office address in just 5 mins.</p>
+                        <button class="bg-white p-4 w-44  mt-6 m-auto" onClick={handleWidget}>
+                                Chat With Us
+                        </button>
 
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
+                </div>
 
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
+      </div>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
+      <Query query={CITY_QUERY} id={null}>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+                {({ data: { voCities } }) => {
+                        return (
+                            <>
+                            <div class="mt-2">
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-x-20 gap-y-10 hover:text-gray-500 cursor-pointer">
+                                            {voCities.map((city) => {
+                                            return (
+                                                <>
+                                                <Link key={city.id} as={`/city/${city.id}`} href={'/city/[id]'}>
+                                                    <div class=" hover:text-gray-800 transition  duration-200"> 
+                                                        <img class="w-full h-52 hover:shadow-xl transition  duration-200" src={ApiUrl + city.image.url} alt={city.name}/>
+                                                        
+                                                        <h2 class="text-xl mt-4 font-semibold hover:text-gray-500">
+                                                                {city.name}
+                                                        </h2>
+                                                        <p class="hover:text-gray-500 truncate">
+                                                            {city.description}
+                                                        </p>
+                                                    </div>
+                                                </Link>
+
+                                                    </>
+                                            );
+                                            })}
+                                    </div>
+                            </div>
+
+
+
+                            
+
+                                </>
+                        );
+                        }}
+                </Query>
+
+
+
+
+
+
+
+
+      
+      <div style={{ backgroundColor: '#f9f9f9' }} class="mt-20 md:flex px-10 py-20">
+        <div class="md:w-6/12 pl-20 pr-20">
+          <Image class="lg:w-8/12 m-auto" src={mail} alt="coworking-members"/>
         </div>
-      </main>
+        <div class="md:w-6/12 pt-20 md:pt-0 md:pl-8">
+          <div>
+            <h1 class="text-3xl">How QuickVO Works?</h1>
+          </div>
+          <div class="mt-6">
+            <h2 class="text-xl">1. Select Location</h2>
+            <hr class="border border-gray-400 w-10 mt-2"></hr>
+            <p class="mt-2">Explore our locations and packages to select your address</p>
+          </div>
+          <div class="mt-10">
+            <h2 class="text-xl">2. Upload Documents</h2>
+            <hr class="border border-gray-400 w-10 mt-2"></hr>
+            <p class="mt-2">Your KYC documents makes the process super quick to draft the agreements</p>
+          </div>
+          <div class="mt-10">
+            <h2 class="text-xl">3. Get Your Address</h2>
+            <hr class="border border-gray-400 w-10 mt-2"></hr>
+            <p class="mt-2"> It hardly takes 4-24 hours processing time, Your address agreements will be in your inbox </p>
+          </div>
+        </div>
+      </div>
 
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
+      
     </div>
   )
 }
+
