@@ -1,23 +1,24 @@
 import gql from "graphql-tag";
 
 const CITY_QUERY = gql`
-  query VoCities {
-    voCities {
-        id
+  query Cities {
+    cities  {
+      id
       name
       slug
+      description
       image {
         url
       }
-      virtual_offices {
-        ... on VirtualOffice {
+      coworkings (limit : 8) {
+        ... on Coworking {
           id
           name
           slug
-          description
-          price
-          banner {
-            url
+          seater
+          srcImages
+          areas {
+            area
           }
         }
       }

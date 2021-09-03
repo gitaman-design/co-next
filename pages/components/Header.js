@@ -1,8 +1,48 @@
 import { useState } from "react";
 import Link from "next/link"
+import Image from "next/image"
+import logo from "../../public/assets/logo-dark.png"
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
+
+
+
+const menu = (
+  <Menu>
+    <Menu.Item>
+      <Link href="/city/1485">
+        <h4 class="hover:underline font-lg">Rent an office in Delhi</h4>
+      </Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link href="/city/1488">
+        <h4 class="hover:underline font-lg">Rent an office in Gurgaon</h4>
+      </Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link href="/city/1489">
+        <h4 class="hover:underline font-lg">Rent an office in Noida</h4>
+      </Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link href="/city/1487">
+        <h4 class="hover:underline font-lg">Rent an office in Bangalore</h4>
+      </Link>
+    </Menu.Item><Menu.Item>
+      <Link href="/city/1486">
+        <h4 class="hover:underline font-lg">Rent an office in Mumbai</h4>
+      </Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link href="/city/1490">
+        <h4 class="hover:underline font-lg">Rent an office in Pune</h4>
+      </Link>
+    </Menu.Item>
+
+    
+  </Menu>
+);
 
 
 function Header() {
@@ -19,20 +59,25 @@ function Header() {
         
           <div>
             <Link href="/">
-              {/* <img class="w-32" src={logo} alt="logo" /> */}
-              <h1 class="text-3xl">Virtual Office</h1>
+              <div class="w-32">
+                <Image src={logo} alt="logo" />
+              </div>
             </Link>
           </div>
-          <div class="hidden md:flex pt-10 sm:p-2 flex space-x-6 cursor-pointer">
-          
+
+         <div class="hidden md:flex pt-10 sm:p-2 flex space-x-6 cursor-pointer">
+              <Dropdown overlay={menu}>
+                <a href="/" className="ant-dropdown-link text-black hover:text-black" onClick={e => e.preventDefault()}>
+                Rent an Office <DownOutlined />
+              </a>
+              </Dropdown>
             <Link href="/resources">
               <h4 class="hover:underline">Resources</h4>
-          </Link>
-          
-            <Link href="/contact-us">
-              <h4 class="hover:underline">Call us: +91 989-999-0277</h4>
             </Link>
-        </div>
+            <Link href="/contact-us">
+              <h4 class="hover:underline">Contact Us</h4>
+            </Link>
+          </div>
         
 
         {/* mobile button goes here */}
@@ -55,18 +100,18 @@ function Header() {
       
         {visible &&
           <div style={{backgroundColor: '#f9f9f9'}} class="mobile-menu items-center w-full text-center text-lg pt-8 space-y-8 mt-4 pb-8">
-          {/* <Dropdown overlay={menu} onClick={e => e.preventDefault()} trigger={['click']}>
+          <Dropdown overlay={menu} onClick={e => e.preventDefault()} trigger={['click']}>
                 <a href="/" className="ant-dropdown-link text-black hover:text-black" onClick={e => e.preventDefault()}>
-                Browse by location <DownOutlined />
+                Rent an Office <DownOutlined />
               </a>
-              </Dropdown> */}
+              </Dropdown>
           
               <Link href="/resources">
               <h4 class="pt-4">Resources</h4>
           </Link>
         
             <Link href="/contact-us">
-              <h4 class="pt-4">Call us: 07428669889</h4>
+              <h4 class="pt-4">Contact Us</h4>
             </Link>
           </div>
       }

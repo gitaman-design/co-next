@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Link from "next/link"
 import Image from 'next/image'
-import mail from '../public/assets/mail.jpg'
 import Query from './api/query/query'
 import BLOG_QUERY from './api/query/blog'
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
@@ -70,13 +69,13 @@ export default function Home({ voBlogs }) {
 
       <Query query={BLOG_QUERY} id={null}>
 
-                {({ data: { voBlogs } }) => {
+                {({ data: { coBlogs } }) => {
                         return (
                             <>
                             <div class="mt-2">
 
                                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-x-20 gap-y-10 hover:text-gray-500 cursor-pointer">
-                                            {voBlogs.map((post) => {
+                                            {coBlogs.map((post) => {
                                             return (
                                                 <>
                                                 <Link key={post.id} as={`/post/${post.id}`} href={'/post/[id]'}>

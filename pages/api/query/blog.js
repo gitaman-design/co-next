@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 const BLOG_QUERY = gql`
-  query VoBlogs {
-    voBlogs {
+  query CoBlogs {
+    coBlogs {
         id
         title
         excerpt

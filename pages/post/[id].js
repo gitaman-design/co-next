@@ -145,7 +145,7 @@ export async function getServerSideProps(context) {
   // console.log(context)
   const { id } = context.query
   // console.log(id)
-  const res = await fetch(`https://cms.bigradar.io/vo-blogs/${id}`)
+  const res = await fetch(`https://cms.bigradar.io/co-blogs/${id}`)
   const slug = await res.json()
   // console.log(slug)
   return {
