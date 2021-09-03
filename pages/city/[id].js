@@ -7,7 +7,7 @@ import Markdown from 'react-markdown'
 import gfm from 'remark-gfm'
 import { useState, useEffect } from "react";
 import { Spin, Skeleton, Space } from 'antd';
-import pin from '../../public/assets/pin.svg'
+import pin from '../assets/pin.svg'
 
 
 const ApiUrl = 'https://cms.bigradar.io'

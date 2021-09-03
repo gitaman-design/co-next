@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Link from "next/link"
 import Image from 'next/image'
-import banner from '../public/assets/banner.png'
-import howWork from '../public/assets/how-works.jpg'
-import pin from '../public/assets/pin.svg'
+import banner from './assets/banner.png'
+import howWork from './assets/how-works.jpg'
+import pin from './assets/pin.svg'
 import Query from './api/query/query'
 import CITY_QUERY from './api/query/category'
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";

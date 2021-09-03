@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link"
 import Image from "next/image"
-import logo from "../../public/assets/logo-dark.png"
+import logo from "../assets/logo-dark.png"
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 

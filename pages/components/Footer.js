@@ -1,8 +1,8 @@
-import logo from "../../public/assets/logo-dark.png"
-import fb from '../../public/assets/social/facebook.svg'
-import tw from '../../public/assets/social/twitter.svg'
-import insta from '../../public/assets/social/instagram.svg'
-import ln from '../../public/assets/social/linkedin.svg'
+import logo from "../assets/logo-dark.png"
+import fb from '../assets/social/facebook.svg'
+import tw from '../assets/social/twitter.svg'
+import insta from '../assets/social/instagram.svg'
+import ln from '../assets/social/linkedin.svg'
 import Link from 'next/link'
 import Image from 'next/image'
 
