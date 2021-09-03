@@ -69,26 +69,26 @@ export default function Slug({ id }) {
 
        <Head>
         {/* HTML Meta Tags */}
-        <title>{id.title} | Virtual Office Coworly</title>
-        <meta name="description" content={id.shortDescription} />
+        <title> {id.title} | Coworly </title>
+        <meta name="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
 
           {/* Google / Search Engine Tags */}
-          <meta itemprop="name" content={`${id.title} | virtual office coworly`} />
-            <meta itemprop="description" content={id.shortDescription} />
-              <meta itemprop="image" content="https://cms.bigradar.io/uploads/ce005b13_38a6_4774_8d34_d7c5c61a5707_c74dcc20a6.jpg" />
+        <meta itemprop="name" content={`${id.title} | Coworly`} />
+            <meta itemprop="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+              <meta itemprop="image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
 
                 {/* <!-- Facebook Meta Tags --> */}
-                <meta property="og:url" content="https://officevirtual.in" />
+                <meta property="og:url" content="https://coworly.com" />
                   <meta property="og:type" content="website" />
-                    <meta property="og:title" content={`${id.title} | virtual office coworly`} />
-                      <meta property="og:description" content={id.shortDescription} />
-                        <meta property="og:image" content="https://cms.bigradar.io/uploads/ce005b13_38a6_4774_8d34_d7c5c61a5707_c74dcc20a6.jpg" />
+                    <meta property="og:title" content={`${id.title} | Coworly`} />
+                      <meta property="og:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+                        <meta property="og:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
                           
                           {/* <!-- Twitter Meta Tags --> */}
                           <meta name="twitter:card" content="summary_large_image" />
-                            <meta name="twitter:title" content={`${id.title} | virtual office coworly`} />
-                              <meta name="twitter:description" content={id.shortDescription} />
-                                <meta name="twitter:image" content="https://cms.bigradar.io/uploads/ce005b13_38a6_4774_8d34_d7c5c61a5707_c74dcc20a6.jpg" />
+                            <meta name="twitter:title" content={`${id.title} | Coworly`} />
+                              <meta name="twitter:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+                                <meta name="twitter:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
 
                                 
                                 <link rel="icon" href="/favicon.ico" />

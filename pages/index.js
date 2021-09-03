@@ -63,26 +63,26 @@ export default function Home({ voCities }) {
       
       <Head>
         {/* HTML Meta Tags */}
-        <title>virtual office address for company registration all over India with instant documentation | virtual office coworly</title>
-        <meta name="description" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
+        <title> Find Coworking Spaces in India - Coworly </title>
+        <meta name="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
 
           {/* Google / Search Engine Tags */}
-          <meta itemprop="name" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
-            <meta itemprop="description" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
-              <meta itemprop="image" content="https://cms.bigradar.io/uploads/ce005b13_38a6_4774_8d34_d7c5c61a5707_c74dcc20a6.jpg" />
+          <meta itemprop="name" content="Find Coworking Spaces in India - Coworly" />
+            <meta itemprop="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+              <meta itemprop="image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
 
                 {/* <!-- Facebook Meta Tags --> */}
-                <meta property="og:url" content="https://officevirtual.in" />
+                <meta property="og:url" content="https://coworly.com" />
                   <meta property="og:type" content="website" />
-                    <meta property="og:title" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
-                      <meta property="og:description" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
-                        <meta property="og:image" content="https://cms.bigradar.io/uploads/ce005b13_38a6_4774_8d34_d7c5c61a5707_c74dcc20a6.jpg" />
+                    <meta property="og:title" content="Find Coworking Spaces in India - Coworly" />
+                      <meta property="og:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+                        <meta property="og:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
                           
                           {/* <!-- Twitter Meta Tags --> */}
                           <meta name="twitter:card" content="summary_large_image" />
-                            <meta name="twitter:title" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
-                              <meta name="twitter:description" content="virtual office address for company registration all over India with instant documentation | virtual office coworly" />
-                                <meta name="twitter:image" content="https://cms.bigradar.io/uploads/ce005b13_38a6_4774_8d34_d7c5c61a5707_c74dcc20a6.jpg" />
+                            <meta name="twitter:title" content="Find Coworking Spaces in India - Coworly" />
+                              <meta name="twitter:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+                                <meta name="twitter:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
 
                                 
                                 <link rel="icon" href="/favicon.ico" />
@@ -215,10 +215,10 @@ export default function Home({ voCities }) {
 
       
       <div style={{backgroundColor: '#f9f9f9'}} class="mt-20 md:flex px-10 py-20">
-                            <div class="md:w-6/12 pl-20 pr-20">
+                            <div class="md:w-6/12 xl:pl-20 xl:pr-20">
                                 <Image class="lg:w-8/12 m-auto" src={howWork} alt="coworking-members"/>
                             </div>
-                            <div class="md:w-6/12 pt-20 md:pt-0 md:pl-8">
+                            <div class="md:w-6/12 pt-20 md:pt-0 lg:pt-20 xl:pt-10 md:pl-8">
                                 <div>
                                     <h1 class="text-3xl">How Coworly Works</h1>
                                 </div>

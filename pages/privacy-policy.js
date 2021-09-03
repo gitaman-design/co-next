@@ -1,8 +1,35 @@
-import {useEffect} from 'react'
+import { useEffect } from 'react'
+import Head from 'next/head'
 
 function PrivacyPolicy() {
     return (
-        <div class="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
+      <div class="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
+        
+        <Head>
+        {/* HTML Meta Tags */}
+        <title> Privacy Policy | Coworly </title>
+        <meta name="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+
+          {/* Google / Search Engine Tags */}
+        <meta itemprop="name" content='Privacy Policy | Coworly' />
+            <meta itemprop="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+              <meta itemprop="image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
+
+                {/* <!-- Facebook Meta Tags --> */}
+                <meta property="og:url" content="https://coworly.com" />
+                  <meta property="og:type" content="website" />
+                    <meta property="og:title" content='Privacy Policy | Coworly' />
+                      <meta property="og:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+                        <meta property="og:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
+                          
+                          {/* <!-- Twitter Meta Tags --> */}
+                          <meta name="twitter:card" content="summary_large_image" />
+                            <meta name="twitter:title" content='Privacy Policy | Coworly' />
+                              <meta name="twitter:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+                                <meta name="twitter:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
+                                 <link rel="icon" href="/favicon.ico" />
+                                
+      </Head>  
           <div>
               
               <h1 class="text-2xl">
