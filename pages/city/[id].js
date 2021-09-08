@@ -1,176 +1,138 @@
 import Head from 'next/head'
 import Link from "next/link"
 import Image from 'next/image'
-import {useRouter} from "next/router"
-import {gql, useQuery} from '@apollo/client';
+import { useRouter } from "next/router"
+import { gql, useQuery } from '@apollo/client';
 import Markdown from 'react-markdown'
 import gfm from 'remark-gfm'
 import { useState, useEffect } from "react";
 import { Spin, Skeleton, Space } from 'antd';
 import pin from '../assets/pin.svg'
+import { CITIES_QUERY } from '../api/query/city';
 
 
 const ApiUrl = 'https://cms.bigradar.io'
 
 const handleWidget = () => {
-    window.BigRadar?.open()
+  window.BigRadar?.open()
 }
 
-
-
-
-export default function Slug({ id }) {
-  
+export default function Slug({id}) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  
+  const city_id = router.query?.id;
+  const cityInfo = useQuery(CITIES_QUERY, { variables: { id: city_id }});
+  console.log(cityInfo.data);
   useEffect(() => {
-        const handleStart = (url) => (url !== router.asPath) && setLoading(true);
-        const handleComplete = (url) => (url === router.asPath) && setLoading(false);
-
-
-    
-        router.events.on('routeChangeStart', handleStart)
-        router.events.on('routeChangeComplete', handleComplete)
-        router.events.on('routeChangeError', handleComplete)
-
-        return () => {
-            router.events.off('routeChangeStart', handleStart)
-            router.events.off('routeChangeComplete', handleComplete)
-            router.events.off('routeChangeError', handleComplete)
-        }
- 
+    // const handleStart = (url) => (url !== router.asPath) && setLoading(true);
+    // const handleComplete = (url) => (url === router.asPath) && setLoading(false);
+    // router.events.on('routeChangeStart', handleStart)
+    // router.events.on('routeChangeComplete', handleComplete)
+    // router.events.on('routeChangeError', handleComplete)
+    return () => {
+      router.events.off('routeChangeStart', handleStart)
+      router.events.off('routeChangeComplete', handleComplete)
+      router.events.off('routeChangeError', handleComplete)
+    }
   }, [])
 
-  if (loading) {
+  if (loading || !cityInfo?.data) {
     return <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
-
       <Space>
         <Skeleton.Image active size={500} />
-          <Skeleton.Image active size={"large"} />
-          <Skeleton.Image active size={"large"} />
+        <Skeleton.Image active size={"large"} />
+        <Skeleton.Image active size={"large"} />
       </Space>
-      
       <Skeleton active paragraph={{ rows: 8 }} />
-      
-
-  </div>
-}
+    </div>
+  }
   return (
     <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
-
-      <Head>
-        {/* HTML Meta Tags */}
+      <p>Hello World </p>
+          <pre>
+            {JSON.stringify(cityInfo.data, null, 2)}
+          </pre>
+      {/* <Head>
         <title>Coworkings in {id.name} | Coworly </title>
         <meta name="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
-
-          {/* Google / Search Engine Tags */}
         <meta itemprop="name" content={`Coworkings in ${id.name} | Coworly`} />
-            <meta itemprop="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
-              <meta itemprop="image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
-
-                {/* <!-- Facebook Meta Tags --> */}
-                <meta property="og:url" content="https://coworly.com" />
-                  <meta property="og:type" content="website" />
-                    <meta property="og:title" content={`Coworkings in ${id.name} | Coworly`} />
-                      <meta property="og:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
-                        <meta property="og:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
-                          
-                          {/* <!-- Twitter Meta Tags --> */}
-                          <meta name="twitter:card" content="summary_large_image" />
-                            <meta name="twitter:title" content={`Coworkings in ${id.name} | Coworly`} />
-                              <meta name="twitter:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
-                                <meta name="twitter:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
-
-                                
-                                <link rel="icon" href="/favicon.ico" />
-                                
+        <meta itemprop="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+        <meta itemprop="image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
+        <meta property="og:url" content="https://coworly.com" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`Coworkings in ${id.name} | Coworly`} />
+        <meta property="og:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+        <meta property="og:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`Coworkings in ${id.name} | Coworly`} />
+        <meta name="twitter:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+        <meta name="twitter:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      
       <div class="">
         <h1 class="text-4xl font-semibold">Coworkings in {id.name}</h1>
         <p class="mt-4 text-lg lg:w-8/12">{id.description}</p>
         <hr class="border-1 border-gray-200 mt-6"></hr>
       </div>
-
-
       <div class="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 cursor-pointer">
-                          {id.areas.slice(0,6).map((a) => {
-                            return(
-                              <>
-                                <Link key={a.id} as={`/city/area/${a.id}`} href={'/city/area/[id]'}>
+        {id.areas.slice(0, 6).map((a) => {
+          return (
+            <>
+              <Link key={a.id} as={`/city/area/${a.id}`} href={'/city/area/[id]'}>
 
-                                      <div class="border p-4 text-center rounded">
-                                          <h2 class="text-base m-0">{a.area}</h2>
-                                      </div>
+                <div class="border p-4 text-center rounded">
+                  <h2 class="text-base m-0">{a.area}</h2>
+                </div>
 
-                                </Link>
-                              </>
-                            )
-                          })}
-                        </div>
-      
+              </Link>
+            </>
+          )
+        })}
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                                            {id.coworkings.map((c) => {
-                                                return(
-                                                    <>
-                                                    <Link key={c.id} as={`/coworkings/${c.id}`} href={'/coworkings/[id]'}>
-                                                                <div class="mt-6 hover:text-gray-500 border border-gray-5 cursor-pointer">
-                                                                  <img class="h-48 w-full" src={c.srcImages[0].large} alt={c.name} />
-                                                                    <h1 class="text-xl mt-4 pl-4 font-semibold truncate pr-4 m-0">{c.name}</h1>
-                                                                    
-                                                        <div class="flex items-center pl-4 mt-2">
-                                                          <Image src={pin} alt="location" />
-                                                          
-                                                          <p class="text-md pl-2 truncate m-0 pr-4">
-                                                            {c.address}
-                                                          </p>
-                                                        </div>
-                                                                    
-                                                    
-                                                                    <Link as={`/coworkings/${c.id}`} href={'/coworkings/[id]'}>
-                                                                        <div style={{backgroundColor: '#788794'}} class="hover:bg-black p-4 m-4  mt-6">
-                                                                            <h1 class="text-white text-center m-0">Explore Now</h1>
-                                                                        </div>
-                                                                    </Link>
+        {id.coworkings.map((c) => {
+          return (
+            <>
+              <Link key={c.id} as={`/coworkings/${c.id}`} href={'/coworkings/[id]'}>
+                <div class="mt-6 hover:text-gray-500 border border-gray-5 cursor-pointer">
+                  <img class="h-48 w-full" src={c.srcImages[0].large} alt={c.name} />
+                  <h1 class="text-xl mt-4 pl-4 font-semibold truncate pr-4 m-0">{c.name}</h1>
+                  <div class="flex items-center pl-4 mt-2">
+                    <Image src={pin} alt="location" />
 
-                                                                </div>
-                                                            </Link>
-                                                    </>
-                                                )
-                                            })}
-                                        </div>
-
-      
+                    <p class="text-md pl-2 truncate m-0 pr-4">
+                      {c.address}
+                    </p>
+                  </div>
+                  <Link as={`/coworkings/${c.id}`} href={'/coworkings/[id]'}>
+                    <div style={{ backgroundColor: '#788794' }} class="hover:bg-black p-4 m-4  mt-6">
+                      <h1 class="text-white text-center m-0">Explore Now</h1>
+                    </div>
+                  </Link>
+                </div>
+              </Link>
+            </>
+          )
+        })}
+      </div>
       <hr class="border-1 border-gray-200 mt-6"></hr>
       <div class="mt-10">
         <h1 class="m-0 text-2xl"> All areas in {id.name}</h1>
       </div>
-
-       <div class="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 cursor-pointer">
-                          {id.areas.map((a) => {
-                            return(
-                              <>
-                                <Link key={a.id} as={`/city/area/${a.id}`} href={'/city/area/[id]'}>
-
-                                      <div class="border p-2 text-center rounded hover:shadow">
-                                          <h2 class="text-md m-0">{a.area}</h2>
-                                      </div>
-
-                                </Link>
-                              </>
-                            )
-                          })}
-                        </div>
-
-      
-
+      <div class="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 cursor-pointer">
+        {id.areas.map((a) => {
+          return (
+            <>
+              <Link key={a.id} as={`/city/area/${a.id}`} href={'/city/area/[id]'}>
+                <div class="border p-2 text-center rounded hover:shadow">
+                  <h2 class="text-md m-0">{a.area}</h2>
+                </div>
+              </Link>
+            </>
+          )
+        })}
+      </div>
       <hr class="border-1 border-gray-200 mt-6"></hr>
-
-  
-
-      
       <div>
         <Markdown
           children={id.about}
@@ -190,19 +152,15 @@ export default function Slug({ id }) {
             img: ({ alt, src, node, ...props }) => <img src={ApiUrl + src} alt={alt} {...props} />,
           }}
         />
-      </div>
-
+      </div> */}
     </div>
   )
 }
 
 export async function getServerSideProps(context) {
-  // console.log(context)
   const { id } = context.query
-  // console.log(id)
   const res = await fetch(`https://cms.bigradar.io/cities/${id}`)
   const slug = await res.json()
-  // console.log(slug)
   return {
     props: {
       id: slug
