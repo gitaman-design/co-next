@@ -17,24 +17,25 @@ const handleWidget = () => {
   window.BigRadar?.open()
 }
 
-export default function Slug({id}) {
+export default function Slug() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const city_id = router.query?.id;
   const cityInfo = useQuery(CITIES_QUERY, { variables: { id: city_id }});
   console.log(cityInfo.data);
-  useEffect(() => {
-    // const handleStart = (url) => (url !== router.asPath) && setLoading(true);
-    // const handleComplete = (url) => (url === router.asPath) && setLoading(false);
-    // router.events.on('routeChangeStart', handleStart)
-    // router.events.on('routeChangeComplete', handleComplete)
-    // router.events.on('routeChangeError', handleComplete)
-    return () => {
-      router.events.off('routeChangeStart', handleStart)
-      router.events.off('routeChangeComplete', handleComplete)
-      router.events.off('routeChangeError', handleComplete)
-    }
-  }, [])
+  const items = cityInfo.data
+  // useEffect(() => {
+  //   // const handleStart = (url) => (url !== router.asPath) && setLoading(true);
+  //   // const handleComplete = (url) => (url === router.asPath) && setLoading(false);
+  //   // router.events.on('routeChangeStart', handleStart)
+  //   // router.events.on('routeChangeComplete', handleComplete)
+  //   // router.events.on('routeChangeError', handleComplete)
+  //   return () => {
+  //     router.events.off('routeChangeStart', handleStart)
+  //     router.events.off('routeChangeComplete', handleComplete)
+  //     router.events.off('routeChangeError', handleComplete)
+  //   }
+  // }, [])
 
   if (loading || !cityInfo?.data) {
     return <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
@@ -48,10 +49,25 @@ export default function Slug({id}) {
   }
   return (
     <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
+
+      
       <p>Hello World </p>
           <pre>
             {JSON.stringify(cityInfo.data, null, 2)}
-          </pre>
+      </pre>
+
+      
+      if (cityInfo?.data) {
+        { cityInfo?.data?.map((post) => {
+          return (
+            <>
+              <p>{ post.name }</p>
+            </>
+            
+          )
+        })}
+      }
+    
       {/* <Head>
         <title>Coworkings in {id.name} | Coworly </title>
         <meta name="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
@@ -153,17 +169,21 @@ export default function Slug({id}) {
           }}
         />
       </div> */}
+
+      
+
+
     </div>
   )
 }
 
-export async function getServerSideProps(context) {
-  const { id } = context.query
-  const res = await fetch(`https://cms.bigradar.io/cities/${id}`)
-  const slug = await res.json()
-  return {
-    props: {
-      id: slug
-    },
-  }
-}
+// export async function getServerSideProps(context) {
+//   const { id } = context.query
+//   const res = await fetch(`https://cms.bigradar.io/cities/${id}`)
+//   const slug = await res.json()
+//   return {
+//     props: {
+//       id: slug
+//     },
+//   }
+// }
