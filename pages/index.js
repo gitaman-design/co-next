@@ -95,7 +95,7 @@ export default function Home({ voCities }) {
                     <h1 class="text-4xl font-semibold xl:text-5xl">Find Your Own Office</h1>
                     <p style={{ color: '#808080' }} class="mt-4 text-base xl:pr-28 xl:text-xl">One solution for all your coworking needs.
                         Private cabins, Desks, Offices & Meetings Rooms all over India</p>
-                    <Link href="/city/delhi">
+                    <Link href="/city/1485">
                         <div class="bg-black p-4 w-44  mt-6 cursor-pointer">
                             <h1 class="text-white text-center m-0">Explore Now</h1>
                         </div>
