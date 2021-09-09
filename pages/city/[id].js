@@ -7,7 +7,6 @@ import Markdown from 'react-markdown'
 import gfm from 'remark-gfm'
 import { useState, useEffect } from "react";
 import { Spin, Skeleton, Space } from 'antd';
-import pin from '../assets/pin.svg'
 import { CITIES_QUERY } from '../api/query/city';
 
 
@@ -22,8 +21,7 @@ export default function Slug() {
   const [loading, setLoading] = useState(false);
   const city_id = router.query?.id;
   const cityInfo = useQuery(CITIES_QUERY, { variables: { id: city_id }});
-  console.log(cityInfo.data);
-  const items = cityInfo.data
+  const data = cityInfo?.data
   // useEffect(() => {
   //   // const handleStart = (url) => (url !== router.asPath) && setLoading(true);
   //   // const handleComplete = (url) => (url === router.asPath) && setLoading(false);
@@ -37,7 +35,7 @@ export default function Slug() {
   //   }
   // }, [])
 
-  if (loading || !cityInfo?.data) {
+  if (loading || !data) {
     return <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
       <Space>
         <Skeleton.Image active size={500} />
@@ -49,25 +47,14 @@ export default function Slug() {
   }
   return (
     <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
-
-      
       <p>Hello World </p>
-          <pre>
-            {JSON.stringify(cityInfo.data, null, 2)}
-      </pre>
+          {/* <pre>
+            {JSON.stringify(data, null, 2)}
+      </pre> */}
 
-      
-      if (cityInfo?.data) {
-        { cityInfo?.data?.map((post) => {
-          return (
-            <>
-              <p>{ post.name }</p>
-            </>
-            
-          )
-        })}
-      }
-    
+      {data?.cities?.map(city=>
+        <p>{city.name}</p>
+      )}
       {/* <Head>
         <title>Coworkings in {id.name} | Coworly </title>
         <meta name="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
@@ -169,10 +156,6 @@ export default function Slug() {
           }}
         />
       </div> */}
-
-      
-
-
     </div>
   )
 }
