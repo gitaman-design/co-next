@@ -2,7 +2,8 @@ import gql from "graphql-tag";
 
 export const CITIES_QUERY=gql`
 query Cities ($url: String) {
-    cities (where: {slug: $url}) {
+    cities (where: {id: $url}) {
+      id
       name
       slug
       description
@@ -11,6 +12,7 @@ query Cities ($url: String) {
         url
       }
       areas {
+        id
         area
         slug
         coworkings {
