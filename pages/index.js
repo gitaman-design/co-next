@@ -3,7 +3,7 @@ import Link from "next/link"
 import Image from 'next/image'
 import banner from './assets/banner.png'
 import howWork from './assets/how-works.jpg'
-import pin from './assets/pin.svg'
+import pin from './assets/pin.png'
 import Query from './api/query/query'
 import CITY_QUERY from './api/query/category'
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
@@ -165,7 +165,7 @@ export default function Home({ voCities }) {
 
                                                                     <div class="flex items-center pl-4 mt-2">
 
-                                                                        <Image src={pin} alt="location" />
+                                                                        <Image width={20} height={20} src={pin} alt="location" />
 
                                                                         <p class="text-md pl-2 m-0">
                                                                             {c.areas.map((a) => {

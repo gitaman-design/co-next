@@ -8,7 +8,7 @@ import gfm from 'remark-gfm'
 import { useState, useEffect } from "react";
 import { Spin, Skeleton, Space } from 'antd';
 import { CITIES_QUERY } from '../api/query/city';
-import pin from '../assets/pin.svg'
+import pin from '../assets/pin.png'
 
 
 const ApiUrl = 'https://cms.bigradar.io'
@@ -121,7 +121,7 @@ export default function Slug() {
                   <img class="h-48 w-full" src={c.srcImages[0].large} alt={c.name} />
                   <h1 class="text-xl mt-4 pl-4 font-semibold truncate pr-4 m-0">{c.name}</h1>
                   <div class="flex items-center pl-4 mt-2">
-                    <Image src={pin} alt="location" />
+                    <Image width={20} height={20} src={pin} alt="location" />
 
                     <p class="text-md pl-2 m-0">
                     {c.areas.map((a) => {

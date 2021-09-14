@@ -8,7 +8,7 @@ import gfm from 'remark-gfm'
 import { useState, useEffect } from "react";
 import { Spin, Skeleton, Space } from 'antd';
 import { COWORKING_QUERY } from '../api/query/coworking'
-import pin from '../assets/pin.svg'
+import pin from '../assets/pin.png'
 import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
 import { Gallery, Item } from 'react-photoswipe-gallery'
@@ -108,7 +108,7 @@ export default function Slug() {
                                 <div class="mt-8 md:w-8/12 lg:w-10/12">
                                         <h1 class="text-2xl font-semibold">{city.name}</h1>
                                         <div class="flex items-center mt-2">
-                                            <Image src={pin} alt="location" />
+                                            <Image width={20} height={20} src={pin} alt="location" />
                                             <p style={{color: '#808080'}} class="ml-2 text-md md:text-lg m-0">{city.address}</p>
                                         </div>
 

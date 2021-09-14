@@ -6,7 +6,6 @@ import { gql, useQuery } from '@apollo/client';
 import { useState, useEffect } from "react";
 import { Spin, Skeleton, Space } from 'antd';
 import { POST_QUERY } from '../api/query/post';
-import pin from '../assets/pin.svg';
 import Markdown from 'react-markdown'
 import gfm from 'remark-gfm'
 

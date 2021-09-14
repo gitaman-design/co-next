@@ -6,7 +6,7 @@ import { gql, useQuery } from '@apollo/client';
 import { useState, useEffect } from "react";
 import { Spin, Skeleton, Space } from 'antd';
 import { RESOURCES_QUERY } from './api/query/resources';
-import pin from './assets/pin.svg';
+import pin from './assets/pin.png';
 
 
 const ApiUrl = 'https://cms.bigradar.io'

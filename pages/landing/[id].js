@@ -1,109 +1,101 @@
 import Head from 'next/head'
 import Link from "next/link"
 import Image from 'next/image'
-import {gql, useQuery} from '@apollo/client';
-import Markdown from 'react-markdown'
-import gfm from 'remark-gfm'
-import pin from '../assets/pin.svg'
-import rupee from '../assets/rupee.svg'
+import { useRouter } from "next/router"
+import { gql, useQuery } from '@apollo/client';
+import { useState, useEffect } from "react";
+import { Spin, Skeleton, Space } from 'antd';
+import { LANDING_QUERY } from '../api/query/landing'
+import pin from '../assets/pin.png';
 import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
 import { Gallery, Item } from 'react-photoswipe-gallery'
-import ContactForm from './ContactForm';
-import { useState, useEffect } from "react";
-import { Spin,Skeleton, Space} from 'antd';
-import {useRouter} from "next/router"
-
-
+import Markdown from 'react-markdown'
+import gfm from 'remark-gfm'
+import ContactForm from './ContactForm'
 
 const ApiUrl = 'https://cms.bigradar.io'
 
-
 const handleWidget = () => {
-    window.BigRadar?.open()
+  window.BigRadar?.open()
 }
 
-
-
-export default function Slug({ id }) {
-    
-     const router = useRouter();
+export default function Slug() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
-  
-  useEffect(() => {
-        const handleStart = (url) => (url !== router.asPath) && setLoading(true);
-        const handleComplete = (url) => (url === router.asPath) && setLoading(false);
+  const city_id = router.query?.id;
+  console.log(city_id)
+  const cityInfo = useQuery(LANDING_QUERY, { variables: { url: city_id }});
+  const data = cityInfo?.data
 
+  console.log(data)
+  // useEffect(() => {
+  //   // const handleStart = (url) => (url !== router.asPath) && setLoading(true);
+  //   // const handleComplete = (url) => (url === router.asPath) && setLoading(false);
+  //   // router.events.on('routeChangeStart', handleStart)
+  //   // router.events.on('routeChangeComplete', handleComplete)
+  //   // router.events.on('routeChangeError', handleComplete)
+  //   return () => {
+  //     router.events.off('routeChangeStart', handleStart)
+  //     router.events.off('routeChangeComplete', handleComplete)
+  //     router.events.off('routeChangeError', handleComplete)
+  //   }
+  // }, [])
 
-    
-        router.events.on('routeChangeStart', handleStart)
-        router.events.on('routeChangeComplete', handleComplete)
-        router.events.on('routeChangeError', handleComplete)
-
-        return () => {
-            router.events.off('routeChangeStart', handleStart)
-            router.events.off('routeChangeComplete', handleComplete)
-            router.events.off('routeChangeError', handleComplete)
-        }
- 
-  }, [])
-
-  if (loading) {
+  if (loading || !data) {
     return <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
-
       <Space>
         <Skeleton.Image active size={500} />
-          <Skeleton.Image active size={"large"} />
-          <Skeleton.Image active size={"large"} />
+        <Skeleton.Image active size={"large"} />
+        <Skeleton.Image active size={"large"} />
       </Space>
-      
       <Skeleton active paragraph={{ rows: 8 }} />
-      
-
-  </div>
-}
-
-
+    </div>
+  }
   return (
     <div className="py-10 px-6 sm:px-12 xl:px-24 2xl:px-60">
 
-       <Head>
-        {/* HTML Meta Tags */}
-        <title> {id.title} | Coworly </title>
-        <meta name="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+      <Head>
+                {/* HTML Meta Tags */}
+                <title> Landing - Coworly </title>
+                <meta name="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
 
-          {/* Google / Search Engine Tags */}
-        <meta itemprop="name" content={`${id.title} | Coworly`} />
-            <meta itemprop="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
-              <meta itemprop="image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
+                {/* Google / Search Engine Tags */}
+                <meta itemprop="name" content="Resources - Coworly" />
+                <meta itemprop="description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+                <meta itemprop="image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
 
                 {/* <!-- Facebook Meta Tags --> */}
                 <meta property="og:url" content="https://coworly.com" />
-                  <meta property="og:type" content="website" />
-                    <meta property="og:title" content={`${id.title} | Coworly`} />
-                      <meta property="og:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
-                        <meta property="og:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
-                          
-                          {/* <!-- Twitter Meta Tags --> */}
-                          <meta name="twitter:card" content="summary_large_image" />
-                            <meta name="twitter:title" content={`${id.title} | Coworly`} />
-                              <meta name="twitter:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
-                                <meta name="twitter:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Resources - Coworly" />
+                <meta property="og:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+                <meta property="og:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
 
-                                
-                                <link rel="icon" href="/favicon.ico" />
-                                
-      </Head>
+                {/* <!-- Twitter Meta Tags --> */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Resources - Coworly" />
+                <meta name="twitter:description" content="Coworly instantly compares the best pricing available in all the coworking spaces. Explore spaces in Delhi, Mumbai, Bengaluru, Hyderabad and more cities." />
+                <meta name="twitter:image" content="https://static.coworly.com/media/large/dX5rFcpMWj855Ld-office-space-in-connaught-place-meeting-space-awfis1.jpg" />
 
 
-          
-                        {/* Flex Box starts */}
+                <link rel="icon" href="/favicon.ico" />
+
+            </Head> 
+    
+      {data?.voLandingPages?.map((post) => {
+        return (
+          <>
+                
+
+
+                 {/* Flex Box starts */}
                         <div class="mt-10 relative">
                             {/* left flexbox starts */}
                             <div class="md:w-8/12 relative">
                                 <div class="">
-                                    <h1 class="text-6xl font-semibold">{id.title}</h1>
-                                    <p class="mt-4 text-base text-gray-500 w-10/12">{id.shortDescription}</p>
+                                    <h1 class="text-6xl font-semibold">{post.title}</h1>
+                                    <p class="mt-4 text-base text-gray-500 w-10/12">{post.shortDescription}</p>
                                 </div>
                                 
                                 <hr class="border border-gray-100 my-8 w-11/12"></hr>
@@ -113,11 +105,11 @@ export default function Slug({ id }) {
                                 </div>
                                 
                                 <div class="flex flex-wrap mt-6">
-                                    {id.amenities.map((a) => {
+                                    {post.amenities.map((a) => {
                                         return (
                                             <div class="flex items-center mr-6 mb-6">
                                                 <img class="w-6" src={ApiUrl + a.icon.url} alt={a.name} />
-                                                <p class="pl-2 text-base">{a.name}</p>
+                                                <p class="pl-2 text-base m-0">{a.name}</p>
                                             </div>
                                         )
                                     })}
@@ -134,7 +126,7 @@ export default function Slug({ id }) {
 
                                         <Gallery>
 
-                                            {id.image.map((g) => {
+                                            {post.image.map((g) => {
                                                 return (
                                                     <>
                                                         <Item
@@ -168,7 +160,7 @@ export default function Slug({ id }) {
                                     
                                     <div class="">
                                         <Markdown
-                                            children={id.offer}
+                                            children={post.offer}
                                             remarkPlugins={[gfm]}
                                             components={{
                                                 // Rewrite `em`s (`*like so*`) to `i` with a red foreground color.
@@ -199,7 +191,7 @@ export default function Slug({ id }) {
 
                                 <div class="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-6 mb-10">
                                             
-                                            {id.virtual_offices.map((c) => {
+                                            {post.virtual_offices.map((c) => {
                                                 return(
                                                     <>
                                                     <Link key={c.id} as={`/${c.slug}`} href={`/${c.slug}`}>
@@ -208,7 +200,6 @@ export default function Slug({ id }) {
                                                                     <h1 class="text-lg mt-4">{c.name}</h1>
                                                                     {/* <div style={{backgroundColor : '#05A081'}} class="p-2 ml-4 rounded mt-4 w-6/12  md:w-4/12">
                                                                         <p class="text-white"> Price : Rs {c.price}/-</p>
-
                                                                     </div> */}
                                                                     
                                                                     {/* <Link to={`/${c.slug}`}>
@@ -231,7 +222,7 @@ export default function Slug({ id }) {
                                         <h4 style={{ color: "#808080" }} class="text-base">Document Required</h4>
                                         <div class="mt-4">
                                             <Markdown
-                                                children={id.document}
+                                                children={post.document}
                                                 remarkPlugins={[gfm]}
                                                 components={{
                                                     // Rewrite `em`s (`*like so*`) to `i` with a red foreground color.
@@ -259,7 +250,7 @@ export default function Slug({ id }) {
                                         <h4 style={{ color: "#808080" }} class="text-base">How the Process Works</h4>
                                         <div class="mt-4">
                                             <Markdown
-                                                children={id.process}
+                                                children={post.process}
                                                 remarkPlugins={[gfm]}
                                                 components={{
                                                     // Rewrite `em`s (`*like so*`) to `i` with a red foreground color.
@@ -289,7 +280,7 @@ export default function Slug({ id }) {
                                         <h4 style={{ color: "#808080" }} class="text-base">Our Client Testimonials</h4>
                                         <div class="mt-4">
                                             <Markdown
-                                                children={id.testimonial}
+                                                children={post.testimonial}
                                                 remarkPlugins={[gfm]}
                                                 components={{
                                                     // Rewrite `em`s (`*like so*`) to `i` with a red foreground color.
@@ -318,7 +309,7 @@ export default function Slug({ id }) {
                                         <h4 style={{ color: "#808080" }} class="text-base">Frequently Asked Question</h4>
                                         <div class="mt-4">
                                             <Markdown
-                                                children={id.faq}
+                                                children={post.faq}
                                                 remarkPlugins={[gfm]}
                                                 components={{
                                                     // Rewrite `em`s (`*like so*`) to `i` with a red foreground color.
@@ -359,20 +350,19 @@ export default function Slug({ id }) {
             </div>
 
 
-    </div>
+
+
+
+
+
+
+
+
+            </>
+      )
+    })}
+    </div>            
   )
 }
 
-export async function getServerSideProps(context) {
-  // console.log(context)
-  const { id } = context.query
-  // console.log(id)
-  const res = await fetch(`https://cms.bigradar.io/vo-landing-pages/${id}`)
-  const slug = await res.json()
-  // console.log(slug)
-  return {
-    props: {
-      id: slug
-    },
-  }
-}
+
