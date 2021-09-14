@@ -87,6 +87,9 @@ export default function Home({ voCities }) {
 
                 <link rel="icon" href="/favicon.ico" />
 
+              
+
+
             </Head>
 
 

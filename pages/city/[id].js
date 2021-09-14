@@ -149,7 +149,7 @@ export default function Slug() {
         <h1 class="m-0 text-2xl"> All areas in {city.name}</h1>
       </div>
       <div class="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 cursor-pointer">
-        {city.areas.map((a) => {
+        {city.areas.filter(f => f.coworkings.length>0).map((a) => {
           return (
             <>
               <Link key={a.id} as={`/city/area/${a.id}`} href={'/city/area/[id]'}>
@@ -189,102 +189,7 @@ export default function Slug() {
       )
     })}
 
-      {/*
-      <div class="">
-        <h1 class="text-4xl font-semibold">Coworkings in {id.name}</h1>
-        <p class="mt-4 text-lg lg:w-8/12">{id.description}</p>
-        <hr class="border-1 border-gray-200 mt-6"></hr>
-      </div>
-      <div class="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 cursor-pointer">
-        {id.areas.slice(0, 6).map((a) => {
-          return (
-            <>
-              <Link key={a.id} as={`/city/area/${a.id}`} href={'/city/area/[id]'}>
-
-                <div class="border p-4 text-center rounded">
-                  <h2 class="text-base m-0">{a.area}</h2>
-                </div>
-
-              </Link>
-            </>
-          )
-        })}
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {id.coworkings.map((c) => {
-          return (
-            <>
-              <Link key={c.id} as={`/coworkings/${c.id}`} href={'/coworkings/[id]'}>
-                <div class="mt-6 hover:text-gray-500 border border-gray-5 cursor-pointer">
-                  <img class="h-48 w-full" src={c.srcImages[0].large} alt={c.name} />
-                  <h1 class="text-xl mt-4 pl-4 font-semibold truncate pr-4 m-0">{c.name}</h1>
-                  <div class="flex items-center pl-4 mt-2">
-                    <Image src={pin} alt="location" />
-
-                    <p class="text-md pl-2 truncate m-0 pr-4">
-                      {c.address}
-                    </p>
-                  </div>
-                  <Link as={`/coworkings/${c.id}`} href={'/coworkings/[id]'}>
-                    <div style={{ backgroundColor: '#788794' }} class="hover:bg-black p-4 m-4  mt-6">
-                      <h1 class="text-white text-center m-0">Explore Now</h1>
-                    </div>
-                  </Link>
-                </div>
-              </Link>
-            </>
-          )
-        })}
-      </div>
-      <hr class="border-1 border-gray-200 mt-6"></hr>
-      <div class="mt-10">
-        <h1 class="m-0 text-2xl"> All areas in {id.name}</h1>
-      </div>
-      <div class="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 cursor-pointer">
-        {id.areas.map((a) => {
-          return (
-            <>
-              <Link key={a.id} as={`/city/area/${a.id}`} href={'/city/area/[id]'}>
-                <div class="border p-2 text-center rounded hover:shadow">
-                  <h2 class="text-md m-0">{a.area}</h2>
-                </div>
-              </Link>
-            </>
-          )
-        })}
-      </div>
-      <hr class="border-1 border-gray-200 mt-6"></hr>
-      <div>
-        <Markdown
-          children={id.about}
-          remarkPlugins={[gfm]}
-          components={{
-            // Rewrite `em`s (`*like so*`) to `i` with a red foreground color.
-            h1: ({ node, ...props }) => <h1 class="text-black text-4xl my-6" {...props} />,
-            h2: ({ node, ...props }) => <h2 class="text-black text-2xl my-6" {...props} />,
-            h4: ({ node, ...props }) => <h4 class="text-black text-base my-4" {...props} />,
-            a: ({ node, ...props }) => <a class="text-yellow-500 underline" {...props} />,
-            p: ({ node, ...props }) => <p class="text-black text-md md:text-lg my-6" {...props} />,
-            blockquote: ({ node, ...props }) => <blockquote class="py-4 text-black text-lg italic" {...props} />,
-            bold: ({ node, ...props }) => <strong class="" {...props} />,
-            em: ({ node, ...props }) => <i style={{ color: 'red' }} {...props} />,
-            ol: ({ node, ...props }) => <ol class="list-decimal list-inside my-6 text-black text-md md:text-lg" {...props} />,
-            ul: ({ node, ...props }) => <ul class="list-disc list-inside my-6 text-black text-md md:text-lg" {...props} />,
-            img: ({ alt, src, node, ...props }) => <img src={ApiUrl + src} alt={alt} {...props} />,
-          }}
-        />
-      </div> */}
+      
     </div>
   )
 }
-
-// export async function getServerSideProps(context) {
-//   const { id } = context.query
-//   const res = await fetch(`https://cms.bigradar.io/cities/${id}`)
-//   const slug = await res.json()
-//   return {
-//     props: {
-//       id: slug
-//     },
-//   }
-// }

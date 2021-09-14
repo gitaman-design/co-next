@@ -75,7 +75,7 @@ function Header() {
               <h4 class="hover:underline">Resources</h4>
             </Link>
             <Link href="/contact-us">
-              <h4 class="hover:underline">Contact Us</h4>
+              <h4 class="hover:underline">+91-98999-90277</h4>
             </Link>
           </div>
         
@@ -111,7 +111,7 @@ function Header() {
           </Link>
         
             <Link href="/contact-us">
-              <h4 class="pt-4">Contact Us</h4>
+              <h4 class="pt-4">+91-98999-90277</h4>
             </Link>
           </div>
       }

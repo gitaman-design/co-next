@@ -19,6 +19,7 @@ const handleWidget = () => {
 export default function Slug() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  console.log(router.query)
   const city_id = router.query?.id;
   console.log(city_id)
   const cityInfo = useQuery(POST_QUERY, { variables: { url: city_id }});
