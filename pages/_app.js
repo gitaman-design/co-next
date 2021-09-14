@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
                             var fw=f.contentWindow,
                             fd=f.contentDocument,
                             s=fd.body.appendChild(fd.createElement('script'));
-                            fw.widget={frame:f,container:b,config:c};s.src='http://app.bigradar.io/widget.js';
+                            fw.widget={frame:f,container:b,config:c};s.src='https://app.bigradar.io/widget.js';
                         };
                         return b;
                     })(document, {
