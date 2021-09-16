@@ -18,6 +18,14 @@ function MyApp({ Component, pageProps }) {
       <Head>
 
         
+        
+        
+            
+
+      </Head>
+      <ApolloProvider client={client}>
+
+        <Header />
         <script  dangerouslySetInnerHTML={{
                 __html: `
                      (function(d,c) {
@@ -37,13 +45,6 @@ function MyApp({ Component, pageProps }) {
                         // email: '<email>',
                     }) 
             `}}/>
-        
-            
-
-      </Head>
-      <ApolloProvider client={client}>
-
-        <Header />
         <Component {...pageProps} />
         <Footer />
       </ApolloProvider>
